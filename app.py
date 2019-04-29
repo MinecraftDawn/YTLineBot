@@ -33,8 +33,22 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    userID = event.source.user_id
+    
     message = TextSendMessage(text=event.message.text)
+    
     line_bot_api.reply_message(event.reply_token, message)
+    
+    try:
+        video_message = VideoSendMessage(
+            original_content_url='https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+            preview_image_url='https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4'
+        )
+        line_bot_api.push_message(userID,video_message)
+    except linebot.exceptions.LineBotApiError as e:
+        print(e.status_code)
+        print(e.error.message)
+        print(e.error.details)
 
 import os
 if __name__ == "__main__":
