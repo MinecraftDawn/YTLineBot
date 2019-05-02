@@ -42,7 +42,7 @@ def handle_message(event):
     try:
         video_message = VideoSendMessage(
             original_content_url='https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
-            preview_image_url='https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4'
+            preview_image_url='https://i.vimeocdn.com/video/681613544_640.jpg'
         )
         line_bot_api.push_message(userID,video_message)
     except linebot.exceptions.LineBotApiError as e:
