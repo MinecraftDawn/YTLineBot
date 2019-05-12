@@ -68,7 +68,7 @@ from pytube import YouTube
 import requests
 
 def msg2yt(url):
-#try:
+try:
 	# 設定YT物件
     yt = YouTube(url)
 	# 對影片標題取hash並轉成字串
@@ -89,10 +89,14 @@ def msg2yt(url):
     
     return fileName
 
-#except:
+except:
     print("YT錯誤")
     return ""
     
+def createMovieDir():
+    if not os.path.exists(app.root_path + "\\YT_Movies\\"):
+        os.mkdir(app.root_path + "\\YT_Movies\\")
 if __name__ == "__main__":
+    createMovieDir()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
