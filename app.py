@@ -68,26 +68,26 @@ from pytube import YouTube
 import requests
 
 def msg2yt(url):
-try:
-	# 設定YT物件
-    yt = YouTube(url)
-	# 對影片標題取hash並轉成字串
-    fileName = str(hash(yt.title))
-	# 下載影片，並設定目錄及名稱
-    yt.streams.first().download(output_path='YT_Movies',filename=fileName)
-    # 取得影片縮圖網址
-    image = requests.get(yt.thumbnail_url)
-    # 若縮圖網址成功則繼續
-    if image.status_code == 200:
-		# 開啟檔案並寫入
-        with open(app.root_path + "\\YT_Movies\\" + fileName + ".png", 'wb') as f:
-            f.write(image.content)
-            f.close()
-    else:
-        print("Error")
-    del image
-    
-    return fileName
+    try:
+    	# 設定YT物件
+        yt = YouTube(url)
+    	# 對影片標題取hash並轉成字串
+        fileName = str(hash(yt.title))
+    	# 下載影片，並設定目錄及名稱
+        yt.streams.first().download(output_path='YT_Movies',filename=fileName)
+        # 取得影片縮圖網址
+        image = requests.get(yt.thumbnail_url)
+        # 若縮圖網址成功則繼續
+        if image.status_code == 200:
+    		# 開啟檔案並寫入
+            with open(app.root_path + "\\YT_Movies\\" + fileName + ".png", 'wb') as f:
+                f.write(image.content)
+                f.close()
+        else:
+            print("Error")
+        del image
+        
+        return fileName
 
 except:
     print("YT錯誤")
